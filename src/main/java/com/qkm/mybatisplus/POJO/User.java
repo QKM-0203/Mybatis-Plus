@@ -34,4 +34,9 @@ public class User {
     private Long version;
 
 
+    //逻辑删除,就是定义一个标志然后没有从数据库表中真正删除,在查询的时候判断一下就行,要在配置文件中配置,默认0没有删除,1是删除了
+    @TableLogic
+    private Integer deleted;
+
+
 }
