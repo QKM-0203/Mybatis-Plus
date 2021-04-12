@@ -15,7 +15,7 @@ public class User {
 
     //主键设置,全局唯一ID,ID_WORKER使用的是雪花算法,如果自己自定义了值,则使用自定义的值
     //不会使用生成的全局的ID,记得要使用包装类,因为long会默认0,会造成生成全局ID失败
-    @TableId(type = IdType.ID_WORKER)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     private String name;
@@ -34,7 +34,7 @@ public class User {
     private Long version;
 
 
-    //逻辑删除,就是定义一个标志然后没有从数据库表中真正删除,在查询的时候判断一下就行,要在配置文件中配置,默认0没有删除,1是删除了
+    //逻辑删除,好像命名必须是delete,就是定义一个标志然后没有从数据库表中真正删除,在查询的时候判断一下就行,要在配置文件中配置,默认0没有删除,1是删除了
     @TableLogic
     private Integer deleted;
 
