@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "mybatis-plus.configuration.log-impl",
+      "type": "java.lang.String",
+      "description": "Description for mybatis-plus.configuration.log-impl."
+    },
+    {
+      "name": "mybatis-plus.global-config.db-config.logic-delete-value",
+      "type": "java.lang.String",
+      "description": "Description for mybatis-plus.global-config.db-config.logic-delete-value."
+    },
+    {
+      "name": "p6spy.config.customLogMessageFormat",
+      "type": "java.lang.String",
+      "description": "Description for p6spy.config.customLogMessageFormat."
+    },
+    {
+      "name": "p6spy.config.appender",
+      "type": "java.lang.String",
+      "description": "Description for p6spy.config.appender."
+    },
+    {
+      "name": "p6spy.config.logMessageFormat",
+      "type": "java.lang.String",
+      "description": "Description for p6spy.config.logMessageFormat."
+    },
+    {
+      "name": "p6spy.config.executionThreshold",
+      "type": "java.lang.String",
+      "description": "Description for p6spy.config.executionThreshold."
+    }
+  ] }
