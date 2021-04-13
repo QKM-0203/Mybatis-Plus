@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qkm.mybatisplus.mapper.CommentMapper">
 
-    <resultMap id="BaseResultMap" type="com.qkm.mybatisplus.ZD.Comment">
+    <resultMap id="BaseResultMap" type="com.qkm.mybatisplus.Auto.Comment">
             <result property="comment" column="comment" jdbcType="VARCHAR"/>
             <result property="creatat" column="creatAt" jdbcType="VARCHAR"/>
             <result property="blogcreatatandname" column="blogCreatAtAndName" jdbcType="VARCHAR"/>

@@ -1,4 +1,4 @@
-package com.qkm.mybatisplus.ZD;
+package com.qkm.mybatisplus.Auto;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 package com.qkm.mybatisplus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.qkm.mybatisplus.ZD.Comment;
+import com.qkm.mybatisplus.Auto.Comment;
 import org.apache.ibatis.annotations.Param;
 
 /**

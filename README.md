@@ -122,6 +122,76 @@ public class MybatisConfig {
     }
 ```
 ## 乐观锁的使用
+**在配置文件中注入Bean,定义一个属性version加上@Version注解同时在数据库中也加入同样的字段**
+### 模拟两个线程同时操作同一条数据
+```java
+  @Test
+    public void updateOptimisticLocker(){
+        //模拟线程1
+        User user = userMapper.selectById(2L);
+        user.setName("孙瑶");//UPDATE user SET name=?, age=?, email=?, update_time=?, version=? WHERE id=? AND version=?
+
+
+        //模拟线程2
+        User user1 = userMapper.selectById(2L);
+        user1.setName("杨倩");//UPDATE user SET name=?, age=?, email=?, update_time=?, version=? WHERE id=? AND version=?
+        userMapper.updateById(user1);
+
+        userMapper.updateById(user);
+
+        //总结:查询会带上version,判断version和之前是否一致,一致才更新,不一致就不更新,所以user就不能被更新
+
+
+    }
+```
+**利用version来判断是否更新数据**
 ## 逻辑删除
+**所谓逻辑删除,就是没有真正的从表中删除,而是利用一个字段来表示是否被删除,但其实还是存在在表中的.**
+### 使用
+**加入属性deleted,加上注解@TableLogic,表示该字段用来判断是否被删除**
+**在配置文件中加入判断被删除的值和没被删除的值**
+```java
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+```
+**这样数据库在操作数据的时候就会判断是否该数据存在,相当于加上And deleted = 0**
 ## 插入和更新字段的设置
+**在建立一个表的的时候往往会加入两个属性,创建时间和更新时间,用来记录数据的插入和更新**
+### 使用
+**加入字段,同时加上注解,该注解相当于为该属性填充一个性质,createTime注解的含义是当有数据插入时,就会自动更新时间,后面的是属性的注解
+意味着更新和插入都会更新时间**
+```java
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+```
+**需要自己处理器**
+```java
+@Component
+public class MyMetaObjectHandler implements MetaObjectHandler {
+    //表示该方法会用在更新和插入的两个自定义属性上,时间可以i自定义格式化
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        this.setFieldValByName("createTime",new Date(),metaObject);
+        this.setFieldValByName("updateTime",new Date(),metaObject);
+    }
+
+    
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        this.setFieldValByName("updateTime",new Date(),metaObject);
+    }
+}
+
+```
+**做好上面步骤之后每当你插入或更新数据的时候这两个自段也会随之更新**
 ## 全局唯一ID
+**使用注解@TableId(type = IdType.ASSIGN_ID)**
+**IdType有很多的字段,该字段为全局唯一Id,使用雪花算法实现,当你自定义值时就不会自动生成Id了.**
+
+
