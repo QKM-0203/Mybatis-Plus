@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com/qkm/mybatisplus/Mapper")
+@MapperScan({"com/qkm/mybatisplus/Mapper","com/qkm/mybatisplus/mapper"})
 public class MybatisConfig {
 
     //乐观锁插件

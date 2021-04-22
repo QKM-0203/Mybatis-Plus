@@ -192,7 +192,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 **做好上面步骤之后每当你插入或更新数据的时候这两个自段也会随之更新**
 ## 全局唯一ID
 **使用注解@TableId(type = IdType.ASSIGN_ID)**
-**IdType有很多的字段,该字段为全局唯一Id,使用雪花算法实现,当你自定义值时就不会自动生成Id了.**
+**IdType有很多的字段,该字段为全局唯一Id,使用雪花算法实现,当你自定义值时就不会自动生成Id了.*/*
 
 
 

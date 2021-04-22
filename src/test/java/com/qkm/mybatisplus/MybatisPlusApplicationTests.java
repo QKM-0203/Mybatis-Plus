@@ -2,13 +2,16 @@ package com.qkm.mybatisplus;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.qkm.mybatisplus.Auto.Comment;
 import com.qkm.mybatisplus.Mapper.UserMapper;
 import com.qkm.mybatisplus.POJO.User;
+import com.qkm.mybatisplus.mapper.CommentMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -117,6 +120,23 @@ class MybatisPlusApplicationTests {
                 .ge("age",10)
                 .isNotNull("email");
         userMapper.selectList(userQueryWrapper).forEach(System.out::println);
+    }
+
+
+    /**
+     * mybatis-plus使用xml文件将mapperxml放在resources底下就可以自动扫描
+     */
+    @Autowired
+    private CommentMapper commentMapper;
+
+    @Test
+    public void testComment(){
+        Comment comment = new Comment();
+        comment.setComment("测试mybatisplus");
+        comment.setBossid("123456");
+        comment.setBlogcreatatandname("2021-02-22 19:43:5612345");
+        comment.setCreatat("2021-04-22 18:58:31");
+        commentMapper.insertSelective(comment);
     }
 
 }
